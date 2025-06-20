@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg bg-transparent py-3 px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-dark fs-4" href="/">Barakah Bank</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {% if request.user.is_authenticated %}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark hover-effect" href="{% url 'transaction_list' %}">Report</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark hover-effect" href="{% url 'deposit' %}">Deposit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark hover-effect" href="{% url 'withdraw' %}">Withdraw</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark hover-effect" href="{% url 'loan' %}">Loan Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold text-dark hover-effect" href="{% url 'balance_transfer' %}">Transfer Balance</a>
+        </li>
+      </ul>
+
+      <span class="navbar-text me-3 fw-bold text-dark">
+        Welcome, {{ request.user.first_name }} (balance: {{ request.user.account.balance }})
+      </span>
+
+      <a href="{% url 'profile' %}" class="btn btn-outline-primary me-2">Profile</a>
+      <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+      {% else %}
+      <div class="ms-auto d-flex">
+        <a href="{% url 'login' %}" class="btn btn-primary me-2">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-dark">Register</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Remove shadow for transparency */
+  .navbar {
+    box-shadow: none !important;
+  }
+
+  .nav-link.hover-effect:hover {
+    color: #c1121f !important;
+    font-weight: bold !important;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+</style>
