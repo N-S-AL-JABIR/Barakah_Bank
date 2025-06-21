@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import environ
+import dj_database_url
 
 env = environ.Env()
 environ.Env.read_env()
@@ -23,17 +24,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = env.bool("DEBUG", default=False)
 SECRET_KEY = env("SECRET_KEY")
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://barakah-bank.onrender.com", "https://*.127.0.0.1"]
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": env("DB_NAME"),
+#         "USER": env("DB_USER"),
+#         "PASSWORD": env("DB_PASSWORD"),
+#         "HOST": env("DB_HOST"),
+#         "PORT": env("DB_PORT"),
+#     }
+# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
-    }
+    "default": dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default="postgresql://barakah_bank_user:NxSnXEo7Qn1Zsm4fOUuW6vlkVbcTKCkN@dpg-d1baa2muk2gs739hrtv0-a.oregon-postgres.render.com/barakah_bank",
+        # conn_max_age=600,
+    )
 }
 
 
