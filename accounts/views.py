@@ -6,7 +6,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
 from .models import BankProfile
 
 
@@ -36,7 +35,6 @@ class UserLogin(LoginView):
         return reverse_lazy("home")
 
 
-@login_required
 def UserLogoutView(request):
     if request.user.is_authenticated:
         logout(request)
@@ -47,6 +45,8 @@ class UserAccountUpdateView(View):
     template_name = "accounts/profile.html"
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("login")
         form = UserUpdateForm(instance=request.user)
         return render(request, self.template_name, {"form": form})
 
@@ -54,5 +54,5 @@ class UserAccountUpdateView(View):
         form = UserUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect("profile")  # Redirect to the user's profile page
+            return redirect("profile")
         return render(request, self.template_name, {"form": form})

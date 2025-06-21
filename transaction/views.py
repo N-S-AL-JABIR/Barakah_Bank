@@ -69,6 +69,8 @@ class DepositView(TransactionCreateMixin):
         return initial
 
     def form_valid(self, form):
+        if not self.request.user.is_authenticated:
+            return HttpResponse("You must be logged in to perform this action.")
         amount = form.cleaned_data.get("amount")
         account = self.request.user.account
         # if not account.initial_deposit_date:
@@ -106,6 +108,8 @@ class WithdrawView(TransactionCreateMixin):
         return initial
 
     def form_valid(self, form):
+        if not self.request.user.is_authenticated:
+            return HttpResponse("You must be logged in to perform this action.")
         bank = BankProfile.objects.first()
         if bank and bank.is_bankrupt:
             return HttpResponse(
@@ -113,12 +117,17 @@ class WithdrawView(TransactionCreateMixin):
             )
         amount = form.cleaned_data.get("amount")
         account = self.request.user.account
+        if amount > bank.total_balance:
+            return HttpResponse("currently bank does not have enough funds to process this withdrawal.Please reduce the amount or try again later.")
         account.balance -= amount
         account.save(update_fields=["balance"])
         messages.success(self.request, f"Withdraw of {amount} was successful.")
         if bank:
             bank.total_balance -= amount
             bank.save(update_fields=["total_balance"])
+            if bank.total_balance < 1000:
+                bank.is_bankrupt = True
+                bank.save(update_fields=["is_bankrupt"])
         send_transaction_email(
             self.request.user,
             amount,
@@ -142,7 +151,7 @@ class LoanRequestView(TransactionCreateMixin):
     def form_valid(self, form):
         amount = form.cleaned_data.get("amount")
         current_loan_count = Transaction.objects.filter(
-            account=self.request.user.account, transaction_type=3, loan_approved=True
+            account=self.request.user.account, transaction_type=3
         ).count()
         if current_loan_count >= 3:
             return HttpResponse("You can only have 3 active loans at a time.")
@@ -190,7 +199,7 @@ class TransactionReportView(LoginRequiredMixin, ListView):
         else:
             self.balance = self.request.user.account.balance
 
-        return queryset.distinct()  # unique queryset hote hobe
+        return queryset.distinct() 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -277,6 +286,14 @@ class BalanceTransferView(LoginRequiredMixin, View):
 
             messages.success(
                 request, f"Successfully transferred ${amount} to {recipient_number}"
+            )
+            send_transaction_email(
+                self.request.user,
+                amount,
+                "transaction/transaction_email.html",
+                "Deposit Successful",
+                "Transaction has been successfully completed.",
+                "💰",
             )
             return redirect("transaction_list")
 
