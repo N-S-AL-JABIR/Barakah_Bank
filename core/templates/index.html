@@ -35,7 +35,7 @@
   }
 </style>
 
-<div class="container mt-md-5">
+<div class="container mt-md-5 mt-3">
   <div class="row align-items-center mb-5 flex-column-reverse flex-md-row">
     <div class="col-md-6 text-center text-md-start">
       <h1 class="display-4 fw-bold text-gradient">
@@ -58,16 +58,16 @@
     </div>
 
     <div class="col-md-6 text-center">
-      <img src="{% static 'image/Bank.jpg' %}" alt="Bank" loading="lazy" class="img-fluid rounded shadow-sm mb-3" width="100%" height="auto" />
+      <img src="{% static 'image/bank.jpg' %}" alt="Bank" loading="lazy" class="img-fluid rounded shadow-sm mb-3" width="100%" height="auto" />
     </div>
   </div>
 
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card border-0 shadow h-100">
-        <img src="{% static 'image/Deposit.jpg' %}" class="card-img-top" alt="Deposit" loading="lazy" />
+        <img src="{% static 'image/deposit.jpg' %}" class="card-img-top" alt="Deposit" loading="lazy" />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">💰 Deposit Money</h5>
+          <h5 class="card-title fw-bold">Deposit Money</h5>
           <p class="card-text text-muted">Securely deposit funds into your account.</p>
           <a href="{% url 'deposit' %}" class="btn btn-outline-primary rounded-pill px-4">Deposit</a>
         </div>
@@ -76,9 +76,9 @@
 
     <div class="col-md-4">
       <div class="card border-0 shadow h-100">
-        <img src="{% static 'image/Withdraw.jpg' %}" class="card-img-top" alt="Withdraw" loading="lazy" />
+        <img src="{% static 'image/withdraw.jpg' %}" class="card-img-top" alt="Withdraw" loading="lazy" />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">🏧 Withdraw Funds</h5>
+          <h5 class="card-title fw-bold">Withdraw Funds</h5>
           <p class="card-text text-muted">Easily withdraw money from your account.</p>
           <a href="{% url 'withdraw' %}" class="btn btn-outline-danger rounded-pill px-4">Withdraw</a>
         </div>
@@ -87,9 +87,9 @@
 
     <div class="col-md-4">
       <div class="card border-0 shadow h-100">
-        <img src="{% static 'image/Loan.jpg' %}" class="card-img-top" alt="Loan" loading="lazy" />
+        <img src="{% static 'image/loan.jpg' %}" class="card-img-top" alt="Loan" loading="lazy" />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">📄 Request Loan</h5>
+          <h5 class="card-title fw-bold">Request Loan</h5>
           <p class="card-text text-muted">Apply for a loan with fast approval.</p>
           <a href="{% url 'loan' %}" class="btn btn-outline-success rounded-pill px-4">Request Loan</a>
         </div>
