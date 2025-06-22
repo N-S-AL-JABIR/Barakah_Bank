@@ -30,8 +30,8 @@
       </ul>
 
       <div class="d-flex align-items-center gap-2">
-        <span class="navbar-text fw-semibold text-dark d-none d-md-inline">
-          {{ request.user.first_name }} <small class="text-muted">(${{ request.user.account.balance }})</small>
+        <span class="navbar-text fw-semibold text-dark d-md-inline">
+          Balance: <small class="text-muted">${{ request.user.account.balance }}</small>
         </span>
         <a href="{% url 'profile' %}" class="text-primary"><i class="fas fa-user-circle fa-lg"></i></a>
         <a href="{% url 'logout' %}" class="text-danger"><i class="fas fa-sign-out-alt fa-lg"></i></a>
