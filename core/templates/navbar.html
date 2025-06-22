@@ -37,8 +37,8 @@
         Welcome, {{ request.user.first_name }} (balance: {{ request.user.account.balance }})
       </span>
 
-      <a href="{% url 'profile' %}" class="btn btn-outline-primary me-2">Profile</a>
-      <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+      <a href="{% url 'profile' %}" class="text-primary me-2"><i class="fa-solid fa-user fa-lg me-2"></i></a>
+      <a href="{% url 'logout' %}" class="text-danger"><i class="fa-solid fa-right-to-bracket fa-lg me-2"></i></a>
       {% else %}
       <div class="ms-auto d-flex">
         <a href="{% url 'login' %}" class="btn btn-primary me-2">Login</a>
@@ -57,9 +57,7 @@
 
   .nav-link.hover-effect:hover {
     color: #c1121f !important;
-    font-weight: bold !important;
     transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
   }
 
   .btn:hover {

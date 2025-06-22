@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from .forms import UserRegistrationForm, UserUpdateForm
 from django.contrib.auth import login, logout
@@ -7,6 +7,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.shortcuts import redirect
 from .models import BankProfile
+from django.contrib.auth.hashers import check_password
+from django.contrib import messages
+from transaction.views import send_transaction_email
 
 
 class UserRegistration(FormView):
@@ -30,6 +33,7 @@ class UserRegistration(FormView):
 
 class UserLogin(LoginView):
     template_name = "accounts/user_login.html"
+    title =  "Login"
 
     def get_success_url(self):
         return reverse_lazy("home")
@@ -40,9 +44,16 @@ def UserLogoutView(request):
         logout(request)
     return redirect("login")
 
+class UserProfileView(View):
+    template_name = "accounts/profile.html"
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("login")
+        return render(request, self.template_name, {"user": request.user})
 
 class UserAccountUpdateView(View):
-    template_name = "accounts/profile.html"
+    template_name = "accounts/edit_profile.html"
 
     def get(self, request):
         if not request.user.is_authenticated:
@@ -56,3 +67,35 @@ class UserAccountUpdateView(View):
             form.save()
             return redirect("profile")
         return render(request, self.template_name, {"form": form})
+
+
+class ChangePasswordView(View):
+    template_name = "accounts/change_password.html"
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("login")
+        return render(request, self.template_name)
+
+    def post(self, request):
+        current_password = request.POST.get("current_password")
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_password")
+        user = request.user
+        if not check_password(current_password, user.password):
+            messages.error(request, "Current password is incorrect.")
+            return render(request, self.template_name)
+        if new_password != confirm_password:
+            messages.error(request, "New password and confirm password do not match.")
+            return render(request, self.template_name)
+        user.set_password(new_password)
+        user.save()
+        send_transaction_email(
+            self.request.user,
+            None,
+            "transaction/transaction_email.html",
+            "Password Change Successful",
+            "Your password has been successfully changed.",
+            "🔒",
+        )
+        return redirect("profile")

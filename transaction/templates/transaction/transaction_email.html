@@ -34,6 +34,7 @@
                   <td style="padding: 8px 0;">🧾 <strong>Account Number:</strong></td>
                   <td style="padding: 8px 0;">{{ user.account.account_no }}</td>
                 </tr>
+                {% if amount %}
                 <tr>
                   <td style="padding: 8px 0;">📅 <strong>Transaction Time:</strong></td>
                   <td style="padding: 8px 0;">{{ time }}</td>
@@ -46,6 +47,12 @@
                   <td style="padding: 8px 0;">🏦 <strong>New Balance:</strong></td>
                   <td style="padding: 8px 0;">${{ user.account.balance }}</td>
                 </tr>
+                {% else %}
+                <tr>
+                  <td style="padding: 8px 0;">📅 <strong>Time:</strong></td>
+                  <td style="padding: 8px 0;">{{ time }}</td>
+                </tr>
+                {% endif %}
               </table>
 
               <p style="margin-top: 30px;">Thank you for banking with us.</p>

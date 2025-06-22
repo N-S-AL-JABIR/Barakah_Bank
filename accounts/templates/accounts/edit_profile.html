@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %}Update Profile{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="bg-white p-4 p-md-5 rounded shadow-sm">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-4">
+      <div>
+        <a href="{% url 'change_password' %}" class="btn btn-outline-secondary btn-sm btn-md">
+            🔒 Change Password
+          </a>          
+      </div>
+    </div>
+
+    <h2 class="fw-bold text-center mb-4">Update Your Profile</h2>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+      {% endfor %}
+
+      <div class="row g-4">
+        {% for field in form.visible_fields %}
+          <div class="col-md-6">
+            <label for="{{ field.id_for_label }}" class="form-label">
+              {{ field.label }}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-4 d-grid">
+        <button type="submit" class="btn btn-primary btn-lg fw-semibold">
+          💾 Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

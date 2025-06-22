@@ -291,6 +291,14 @@ class BalanceTransferView(LoginRequiredMixin, View):
                 self.request.user,
                 amount,
                 "transaction/transaction_email.html",
+                "Transfer Successful",
+                "Transaction has been successfully completed.",
+                "💰",
+            )
+            send_transaction_email(
+                recipient.user,
+                amount,
+                "transaction/transaction_email.html",
                 "Deposit Successful",
                 "Transaction has been successfully completed.",
                 "💰",

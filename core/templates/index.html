@@ -1,53 +1,136 @@
-{% extends "base.html" %}
-{% block body %}
-<div class="container mt-5">
-  <div class="text-center mb-5">
-    <h1 class="display-4 fw-bold text-gradient">👋 Welcome to Barakah Bank</h1>
-    <p class="lead text-muted">Your trusted financial partner</p>
-  </div>
-
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card border-0 shadow-lg h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-bold">💰 Deposit Money</h5>
-          <p class="card-text text-muted">Securely deposit funds into your account anytime.</p>
-          <a href="{% url 'deposit' %}" class="btn btn-outline-primary rounded-pill">Deposit</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-lg h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-bold">🏧 Withdraw Funds</h5>
-          <p class="card-text text-muted">Easily withdraw money from your account.</p>
-          <a href="{% url 'withdraw' %}" class="btn btn-outline-danger rounded-pill">Withdraw</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-lg h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-bold">📄 Request Loan</h5>
-          <p class="card-text text-muted">Apply for a loan with fast approval process.</p>
-          <a href="{% url 'loan' %}" class="btn btn-outline-success rounded-pill">Request Loan</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center mt-5">
-    <p class="text-muted">Powered by ❤️ Barakah Bank</p>
-  </div>
-</div>
-
+{% extends "base.html" %}{% block head_title %}Home - Barakah Bank{% endblock head_title %} {% load static %} {% block body %}
 <style>
   .text-gradient {
     background: linear-gradient(90deg, #4e54c8, #8f94fb);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  .fade-in {
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-gradient {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(90deg, #5a67d8, #6b46c1);
+  }
 </style>
+
+<div class="container mt-md-5 fade-in">
+  <div class="row align-items-center mb-5 flex-column-reverse flex-md-row">
+    <div class="col-md-6 text-center text-md-start">
+      <h1 class="display-4 fw-bold text-gradient">
+        Welcome to <br />Barakah Bank
+      </h1>
+      <p class="lead text-muted">
+        Your trusted financial partner for digital banking, savings, and quick
+        services.
+      </p>
+      <a
+        href="{% url 'profile' %}"
+        class="btn btn-gradient rounded-pill px-4 py-2 mt-3 mb-3"
+        >View Your Dashboard</a
+      >
+    </div>
+    <div class="col-md-6 text-center">
+      <img
+        src="{% static 'image/Bank.jpg' %}"
+        alt="Bank"
+        class="img-fluid rounded shadow-sm mb-3"
+      />
+    </div>
+  </div>
+
+  <div class="row g-4 fade-in">
+    <div class="col-md-4">
+      <div class="card border-0 shadow-lg h-100">
+        <img
+          src="{% static 'image/Deposit.jpg' %}"
+          class="card-img-top"
+          alt="Deposit"
+        />
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold">💰 Deposit Money</h5>
+          <p class="card-text text-muted">
+            Securely deposit funds into your account anytime.
+          </p>
+          <a
+            href="{% url 'deposit' %}"
+            class="btn btn-outline-primary rounded-pill px-4"
+            >Deposit</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-lg h-100">
+        <img
+          src="{% static 'image/Withdraw.jpg' %}"
+          class="card-img-top"
+          alt="Withdraw"
+        />
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold">🏧 Withdraw Funds</h5>
+          <p class="card-text text-muted">
+            Easily withdraw money from your account.
+          </p>
+          <a
+            href="{% url 'withdraw' %}"
+            class="btn btn-outline-danger rounded-pill px-4"
+            >Withdraw</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-lg h-100">
+        <img
+          src="{% static 'image/Loan.jpg' %}"
+          class="card-img-top"
+          alt="Loan"
+        />
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold">📄 Request Loan</h5>
+          <p class="card-text text-muted">
+            Apply for a loan with fast approval and low interest.
+          </p>
+          <a
+            href="{% url 'loan' %}"
+            class="btn btn-outline-success rounded-pill px-4"
+            >Request Loan</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
