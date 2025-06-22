@@ -40,9 +40,9 @@
       <a href="{% url 'profile' %}" class="text-primary me-2"><i class="fa-solid fa-user fa-lg me-2"></i></a>
       <a href="{% url 'logout' %}" class="text-danger"><i class="fa-solid fa-right-to-bracket fa-lg me-2"></i></a>
       {% else %}
-      <div class="ms-auto d-flex">
-        <a href="{% url 'login' %}" class="btn btn-primary me-2">Login</a>
-        <a href="{% url 'register' %}" class="btn btn-outline-dark">Register</a>
+      <div class="ms-auto d-flex gap-2">
+        <a href="{% url 'login' %}" class="btn btn-primary px-4  py-2 rounded-pill">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-dark px-4 py-2 rounded-pill">Register</a>
       </div>
       {% endif %}
     </div>

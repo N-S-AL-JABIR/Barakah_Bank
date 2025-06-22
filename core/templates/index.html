@@ -1,4 +1,5 @@
-{% extends "base.html" %}{% block head_title %}Home - Barakah Bank{% endblock head_title %} {% load static %} {% block body %}
+{% extends "base.html" %}{% block head_title %}Home - Barakah Bank 
+{% endblock head_title %} {% load static %} {% block body %}
 <style>
     .text-gradient {
       background: linear-gradient(90deg, #4e54c8, #8f94fb);
@@ -44,7 +45,7 @@
     }
 </style>
 
-<div class="container mt-md-5 fade-in">
+<div class="container mt-md-5">
   <div class="row align-items-center mb-5 flex-column-reverse flex-md-row">
     <div class="col-md-6 text-center text-md-start">
       <h1 class="display-4 fw-bold text-gradient">
@@ -69,13 +70,13 @@
           href="{% url 'login' %}"
           class="btn btn-primary px-4 py-2 rounded-pill"
         >
-          🔐 Login
+          Login
         </a>
         <a
           href="{% url 'register' %}"
           class="btn btn-outline-dark px-4 py-2 rounded-pill"
         >
-          ✍️ Sign Up
+          Sign Up
         </a>
       </div>
       {% endif %}
@@ -89,17 +90,18 @@
     </div>
   </div>
 
-  <div class="row g-4 fade-in">
+  <div class="row g-4">
     <div class="col-md-4">
       <div class="card border-0 shadow-lg h-100">
         <img
+          rel="preload"
           src="{% static 'image/Deposit.jpg' %}"
           loading="lazy"
           class="card-img-top"
           alt="Deposit"
         />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">💰 Deposit Money</h5>
+          <h5 class="card-title fw-bold">Deposit Money</h5>
           <p class="card-text text-muted">
             Securely deposit funds into your account anytime.
           </p>
@@ -115,13 +117,14 @@
     <div class="col-md-4">
       <div class="card border-0 shadow-lg h-100">
         <img
+          rel="preload"
           src="{% static 'image/Withdraw.jpg' %}"
           loading="lazy"
           class="card-img-top"
           alt="Withdraw"
         />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">🏧 Withdraw Funds</h5>
+          <h5 class="card-title fw-bold">Withdraw Funds</h5>
           <p class="card-text text-muted">
             Easily withdraw money from your account.
           </p>
@@ -137,13 +140,14 @@
     <div class="col-md-4">
       <div class="card border-0 shadow-lg h-100">
         <img
+          rel="preload"
           src="{% static 'image/Loan.jpg' %}"
           loading="lazy"
           class="card-img-top"
           alt="Loan"
         />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">📄 Request Loan</h5>
+          <h5 class="card-title fw-bold">Request Loan</h5>
           <p class="card-text text-muted">
             Apply for a loan with fast approval and low interest.
           </p>
