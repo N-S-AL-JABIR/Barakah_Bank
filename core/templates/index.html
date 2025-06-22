@@ -1,49 +1,50 @@
 {% extends "base.html" %}{% block head_title %}Home - Barakah Bank{% endblock head_title %} {% load static %} {% block body %}
 <style>
-  .text-gradient {
-    background: linear-gradient(90deg, #4e54c8, #8f94fb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-{% comment %} 
-  .fade-in {
-    animation: fadeIn 1s ease-in;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+    .text-gradient {
+      background: linear-gradient(90deg, #4e54c8, #8f94fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  {% comment %}
+    .fade-in {
+      animation: fadeIn 1s ease-in;
     }
-  } {% endcomment %}
 
-  .card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    } {% endcomment %}
 
-  .card:hover {
-    transform: scale(1.02);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  }
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
 
-  .btn-gradient {
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-  }
+    {% comment %} .card:hover {
+      transform: scale(1.02);
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    } {% endcomment %}
 
-  .btn-gradient:hover {
-    background: linear-gradient(90deg, #5a67d8, #6b46c1);
-  }
+    .btn-gradient {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(90deg, #5a67d8, #6b46c1);
+    }
 </style>
 
-<div class="container mt-md-5">
+<div class="container mt-md-5 fade-in">
   <div class="row align-items-center mb-5 flex-column-reverse flex-md-row">
     <div class="col-md-6 text-center text-md-start">
       <h1 class="display-4 fw-bold text-gradient">
@@ -53,11 +54,31 @@
         Your trusted financial partner for digital banking, savings, and quick
         services.
       </p>
+      {% if request.user.is_authenticated %}
       <a
         href="{% url 'profile' %}"
         class="btn btn-gradient rounded-pill px-4 py-2 mt-3 mb-3"
-        >View Your Dashboard</a
       >
+        View Your Dashboard
+      </a>
+      {% else %}
+      <div
+        class="d-flex gap-2 justify-content-center justify-content-md-start mt-3 mb-3"
+      >
+        <a
+          href="{% url 'login' %}"
+          class="btn btn-primary px-4 py-2 rounded-pill"
+        >
+          🔐 Login
+        </a>
+        <a
+          href="{% url 'register' %}"
+          class="btn btn-outline-dark px-4 py-2 rounded-pill"
+        >
+          ✍️ Sign Up
+        </a>
+      </div>
+      {% endif %}
     </div>
     <div class="col-md-6 text-center">
       <img
@@ -73,6 +94,7 @@
       <div class="card border-0 shadow-lg h-100">
         <img
           src="{% static 'image/Deposit.jpg' %}"
+          loading="lazy"
           class="card-img-top"
           alt="Deposit"
         />
@@ -94,6 +116,7 @@
       <div class="card border-0 shadow-lg h-100">
         <img
           src="{% static 'image/Withdraw.jpg' %}"
+          loading="lazy"
           class="card-img-top"
           alt="Withdraw"
         />
@@ -115,6 +138,7 @@
       <div class="card border-0 shadow-lg h-100">
         <img
           src="{% static 'image/Loan.jpg' %}"
+          loading="lazy"
           class="card-img-top"
           alt="Loan"
         />
