@@ -1,48 +1,38 @@
-{% extends "base.html" %}{% block head_title %}Home - Barakah Bank 
-{% endblock head_title %} {% load static %} {% block body %}
+{% extends "base.html" %}
+{% block head_title %}Home - Barakah Bank{% endblock %}
+{% load static %}
+
+{% block body %}
 <style>
-    .text-gradient {
-      background: linear-gradient(90deg, #4e54c8, #8f94fb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  {% comment %}
-    .fade-in {
-      animation: fadeIn 1s ease-in;
-    }
+  .text-gradient {
+    background: linear-gradient(90deg, #4e54c8, #8f94fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    } {% endcomment %}
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
 
-    .card-img-top {
-      height: 200px;
-      object-fit: cover;
-      width: 100%;
-    }
-
-    {% comment %} .card:hover {
+  @media (hover: hover) {
+    .card:hover {
       transform: scale(1.02);
       transition: all 0.3s ease-in-out;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    } {% endcomment %}
-
-    .btn-gradient {
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      color: white;
-      border: none;
     }
+  }
 
-    .btn-gradient:hover {
-      background: linear-gradient(90deg, #5a67d8, #6b46c1);
-    }
+  .btn-gradient {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(90deg, #5a67d8, #6b46c1);
+  }
 </style>
 
 <div class="container mt-md-5">
@@ -52,110 +42,56 @@
         Welcome to <br />Barakah Bank
       </h1>
       <p class="lead text-muted">
-        Your trusted financial partner for digital banking, savings, and quick
-        services.
+        Your trusted financial partner for digital banking, savings, and quick services.
       </p>
+
       {% if request.user.is_authenticated %}
-      <a
-        href="{% url 'profile' %}"
-        class="btn btn-gradient rounded-pill px-4 py-2 mt-3 mb-3"
-      >
-        View Your Dashboard
-      </a>
+        <a href="{% url 'profile' %}" class="btn btn-gradient rounded-pill px-4 py-2 mt-3 mb-3">
+          View Your Dashboard
+        </a>
       {% else %}
-      <div
-        class="d-flex gap-2 justify-content-center justify-content-md-start mt-3 mb-3"
-      >
-        <a
-          href="{% url 'login' %}"
-          class="btn btn-primary px-4 py-2 rounded-pill"
-        >
-          Login
-        </a>
-        <a
-          href="{% url 'register' %}"
-          class="btn btn-outline-dark px-4 py-2 rounded-pill"
-        >
-          Sign Up
-        </a>
-      </div>
+        <div class="d-flex gap-2 justify-content-center justify-content-md-start mt-3 mb-3">
+          <a href="{% url 'login' %}" class="btn btn-primary px-4 py-2 rounded-pill">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-outline-dark px-4 py-2 rounded-pill">Sign Up</a>
+        </div>
       {% endif %}
     </div>
+
     <div class="col-md-6 text-center">
-      <img
-        src="{% static 'image/Bank.jpg' %}"
-        alt="Bank"
-        class="img-fluid rounded shadow-sm mb-3"
-      />
+      <img src="{% static 'image/Bank.jpg' %}" alt="Bank" loading="lazy" class="img-fluid rounded shadow-sm mb-3" width="100%" height="auto" />
     </div>
   </div>
 
   <div class="row g-4">
     <div class="col-md-4">
-      <div class="card border-0 shadow-lg h-100">
-        <img
-          rel="preload"
-          src="{% static 'image/Deposit.jpg' %}"
-          loading="lazy"
-          class="card-img-top"
-          alt="Deposit"
-        />
+      <div class="card border-0 shadow h-100">
+        <img src="{% static 'image/Deposit.jpg' %}" class="card-img-top" alt="Deposit" loading="lazy" />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">Deposit Money</h5>
-          <p class="card-text text-muted">
-            Securely deposit funds into your account anytime.
-          </p>
-          <a
-            href="{% url 'deposit' %}"
-            class="btn btn-outline-primary rounded-pill px-4"
-            >Deposit</a
-          >
+          <h5 class="card-title fw-bold">💰 Deposit Money</h5>
+          <p class="card-text text-muted">Securely deposit funds into your account.</p>
+          <a href="{% url 'deposit' %}" class="btn btn-outline-primary rounded-pill px-4">Deposit</a>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card border-0 shadow-lg h-100">
-        <img
-          rel="preload"
-          src="{% static 'image/Withdraw.jpg' %}"
-          loading="lazy"
-          class="card-img-top"
-          alt="Withdraw"
-        />
+      <div class="card border-0 shadow h-100">
+        <img src="{% static 'image/Withdraw.jpg' %}" class="card-img-top" alt="Withdraw" loading="lazy" />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">Withdraw Funds</h5>
-          <p class="card-text text-muted">
-            Easily withdraw money from your account.
-          </p>
-          <a
-            href="{% url 'withdraw' %}"
-            class="btn btn-outline-danger rounded-pill px-4"
-            >Withdraw</a
-          >
+          <h5 class="card-title fw-bold">🏧 Withdraw Funds</h5>
+          <p class="card-text text-muted">Easily withdraw money from your account.</p>
+          <a href="{% url 'withdraw' %}" class="btn btn-outline-danger rounded-pill px-4">Withdraw</a>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card border-0 shadow-lg h-100">
-        <img
-          rel="preload"
-          src="{% static 'image/Loan.jpg' %}"
-          loading="lazy"
-          class="card-img-top"
-          alt="Loan"
-        />
+      <div class="card border-0 shadow h-100">
+        <img src="{% static 'image/Loan.jpg' %}" class="card-img-top" alt="Loan" loading="lazy" />
         <div class="card-body text-center">
-          <h5 class="card-title fw-bold">Request Loan</h5>
-          <p class="card-text text-muted">
-            Apply for a loan with fast approval and low interest.
-          </p>
-          <a
-            href="{% url 'loan' %}"
-            class="btn btn-outline-success rounded-pill px-4"
-            >Request Loan</a
-          >
+          <h5 class="card-title fw-bold">📄 Request Loan</h5>
+          <p class="card-text text-muted">Apply for a loan with fast approval.</p>
+          <a href="{% url 'loan' %}" class="btn btn-outline-success rounded-pill px-4">Request Loan</a>
         </div>
       </div>
     </div>
