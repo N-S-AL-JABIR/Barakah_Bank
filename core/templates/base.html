@@ -29,21 +29,6 @@
     }
   </style>
   <body>
-    <!-- Spinner -->
-    <div
-      id="pageSpinner"
-      class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-white"
-      style="z-index: 1055"
-    >
-      <div
-        class="spinner-border text-primary"
-        role="status"
-        style="width: 3rem; height: 3rem"
-      >
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-
     {% include 'navbar.html' %} {% if messages %}
 
     <div class="container mt-4">
@@ -71,14 +56,5 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script>
-      window.addEventListener("load", function () {
-        const spinner = document.getElementById("pageSpinner");
-        if (spinner) {
-          spinner.classList.add("d-none");
-        }
-      });
-    </script>
-    
   </body>
 </html>
