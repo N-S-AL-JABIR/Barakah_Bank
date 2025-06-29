@@ -300,7 +300,7 @@ class BalanceTransferView(LoginRequiredMixin, View):
                 amount,
                 "transaction/transaction_email.html",
                 "Deposit Successful",
-                "Transaction has been successfully completed.",
+                f"You have received ${amount} from {self.request.user.first_name} {self.request.user.last_name}.",
                 "💰",
             )
             return redirect("transaction_list")
